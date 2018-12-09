@@ -37,11 +37,9 @@ class ApiController extends Controller
 
     public function userTransaction(Request $request)
     {
-        $user = DB::table('users')->where('cpf', $request->cpf)->first();
-        $donation = Donation::where('user_id',$user->id)->get();
-        $investment = Investment::where('user_id',$user->id)->get();
+        $donation = Donation::where('document', $request->document)->get();
+        $investment = Investment::get();
         return response()->json([
-            'user'=>$user,
             'donation'=>$donation,
             'investment'=>$investment,
         ], 201);
